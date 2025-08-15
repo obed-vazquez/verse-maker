@@ -5,16 +5,17 @@
  * GoogleProyect:   https://script.google.com/d/14Qrk-vG5uDw_2Cws9NePZEazz8oEEVxHUlAKP_pp4Iut6PrF83YmYOtY/edit
  * License:         (Spanish) http://creativecommons.org/licenses/by-nc/2.5/mx/
  * Legal Code:      (Spanish) http://creativecommons.org/licenses/by-nc/2.5/mx/legalcode
+ * Updated:         Migrated to V8 compatibility
  */
  
  /**
- * This is a temporal flag to know if it is working on a Development evironment or in production.
+ * This is a temporal flag to know if it is working on a Development environment or in production.
  * If the plug-in has being deployed please set this flag into false.
  * @type    {boolean}
  * @author  Obed Vazquez
  * @since   27/07/2016
  */
-var devMode=false;
+const devMode = false;
 
 /**
  * This class contains all the process of the project.
@@ -32,36 +33,37 @@ var devMode=false;
 function VerseMaker() {
 
 }
+
 /**
  * This are reusable regex used in the books array. For the first second and third books or letters in the Bible.
  * @type    {string}
  * @author  Obed Vazquez
  * @since   26/01/2016
  */
-var regexFirstOf = "(((1(((st)|[ao])[\\s]))|([1Ii][\\s]?))|((([Ff][Ii][Rr][Ss][Tt]([\\s][Oo][Ff])?)|([Pp][Rr][Ii][Mm][Ee][Rr][AaOo]([\\s][Dd][Ee])?))[\\s]))";
+const regexFirstOf = "(((1(((st)|[ao])[\\s]))|([1Ii][\\s]?))|((([Ff][Ii][Rr][Ss][Tt]([\\s][Oo][Ff])?)|([Pp][Rr][Ii][Mm][Ee][Rr][AaOo]([\\s][Dd][Ee])?))[\\s]))";
 /**
  * @type    {string}
  * @author  Obed Vazquez
  * @since   26/01/2016
  */
-var regexSecondOf = "(((2(((nd)|[ao])[\\s]))|((2|((II)|(ii)))[\\s]?))|((([Ss][Ee][Cc][Oo][Nn][Dd]([\\s][Oo][Ff])?)|([Ss][Ee][Gg][Uu][Nn][Dd][AaOo]([\\s][Dd][Ee])?))[\\s]))";
+const regexSecondOf = "(((2(((nd)|[ao])[\\s]))|((2|((II)|(ii)))[\\s]?))|((([Ss][Ee][Cc][Oo][Nn][Dd]([\\s][Oo][Ff])?)|([Ss][Ee][Gg][Uu][Nn][Dd][AaOo]([\\s][Dd][Ee])?))[\\s]))";
 /**
  * @type    {string}
  * @author  Obed Vazquez
  * @since   26/01/2016
  */
-var regexThirdOf = "(((3(((rd)|[ao])[\\s]))|((3|(III|(iii)))[\\s]?))|((([Tt][Hh][Ii][Rr][Dd]([\\s][Oo][Ff])?)|([Tt][Ee][Rr][Cc][Ee][Rr][AaOo]([\\s][Dd][Ee])?))[\\s]))";
+const regexThirdOf = "(((3(((rd)|[ao])[\\s]))|((3|(III|(iii)))[\\s]?))|((([Tt][Hh][Ii][Rr][Dd]([\\s][Oo][Ff])?)|([Tt][Ee][Rr][Cc][Ee][Rr][AaOo]([\\s][Dd][Ee])?))[\\s]))";
 
 /**
  * This is an array with all the regex on the Bible used to identify an abbreviation or full name of a book in the Bible.
  * list of books abreviations: https://docs.google.com/spreadsheets/d/140t98l2sZFA0CXipsg6zmlrhYPqGw3oHxSSh7MLI8MU/edit#gid=1285639834
  * accented elements https://lefunes.wordpress.com/2007/11/14/caracteres-especiales-en-javascript/
- * @type    {Array}
+ * @type    {Object}
  * @author  Obed Vazquez
  * @author  Oscar Villareal
  * @since   26/01/2016
  */
-var books = {
+const books = {
     "gen": "\\b([Gg][Ee][Nn][Ee][Ss][Ii][Ss]|[Gg][\u00c9\u00e9][Nn][Ee][Ss][Ii][Ss]|[Gg][Ee][Nn]|[Gg][\u00c9\u00e9][Nn]|[Gg][Ee]|[Gg][Nn]|[Gg][\u00c9\u00e9])",
     "exo": "\\b([Ee][Xx][Oo][Dd][Oo]|[Ee][Xx]|[Ee][Xx][Oo]|[\u00c9\u00e9][Xx][Oo][Dd][Oo]|[\u00c9\u00e9][Xx]|[\u00c9\u00e9][Xx][Oo])",
     "lev": "\\b([Ll][Ee][Vv][Ii][Tt][Ii][Cc][Oo]|[Ll][Ee][Vv][\u00CD\u00ed][Tt][Ii][Cc][Oo]|[Ll][Ee][Vv][Ii][Tt][Ii][Cc]|[Ll][Ee][Vv][\u00CD\u00ed][Tt]|[Ll][Ee][Vv][\u00CD\u00ed]|[Ll][Ee][Vv][Ii][Tt]|[Ll][Ee][Vv][Ii]|[Ll][Ee][Vv]|[Ll][Ee]|[Ll][Vv])",
@@ -139,8 +141,8 @@ var books = {
  * @author Obed Vazquez
  * @since 26/01/2016
  */
-var allVersesRegex = "[\\.]?[\\s]?[\\d]*[:|\\.]?[\\d]+(([-]{1}[\\d]+)?([,][\\s]?[\\d]+([-]{1}[\\d]+)?)*)?"; 
-//bible.com no acepta referencias entre varios capitulos por ejemplo: Jn 1:3-2:3  ó Jn 3:2;4:1 (con el ultimo se identificaria como: Jn 3:2,4)
+const allVersesRegex = "[\\.]?[\\s]?[\\d]*[:|\\.]?[\\d]+(([-]{1}[\\d]+)?([,][\\s]?[\\d]+([-]{1}[\\d]+)?)*)?"; 
+//bible.com no acepta referencias entre varios capitulos por ejemplo: Jn 1:3-2:3  Ó Jn 3:2;4:1 (con el ultimo se identificaria como: Jn 3:2,4)
 //El ; se elimino para que solo identifique la , pues es muy claro que es estandar.
 
 /**
@@ -150,10 +152,7 @@ var allVersesRegex = "[\\.]?[\\s]?[\\d]*[:|\\.]?[\\d]+(([-]{1}[\\d]+)?([,][\\s]?
  * @author  Obed Vazquez
  * @since   26/01/2016
  */
-var idiomID;
-
-
-
+let idiomID;
 
 /**
  * Turns all the references to the Bible in the document to an hyperlink to the actual
@@ -163,20 +162,23 @@ var idiomID;
  * @author Obed Vazquez Lopez
  * @since 26/01/2016
  * @version 28/Jul/2016
- * @throws VerseMakerException Uknown Exception.
+ * @throws VerseMakerException Unknown Exception.
  */
 VerseMaker.prototype.setBibleHyperlinksEnglish = function setBibleHyperlinksEnglish() {
-    Logger.log(this.name + "." + arguments.callee.name + "() :: ");
+    const methodName = 'setBibleHyperlinksEnglish';
+    Logger.log(this.constructor.name + "." + methodName + "() :: ");
     try {
-
         idiomID = 1;
-        var versesFoundCounter=this.setBibleHyperlinks();
-        this.alert("VerseMaker couldn't found any Biblical citation, if you need help you can go to the About menu to learn how to make your own Bible verse citation.","Oops!");
-
+        const versesFoundCounter = this.setBibleHyperlinks();
+        if(versesFoundCounter === 0) {
+            this.alert("VerseMaker couldn't found any Biblical citation, if you need help you can go to the About menu to learn how to make your own Bible verse citation.","Oops!");
+        } else {
+            this.alert(versesFoundCounter + " verses have been set as hyperlinks to the KJV version.", "Success");
+        }
     } catch (e) {
-        var errorTitle = "UnknownError";
-        var errorMessage = "Impossible to set the language to english";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, arguments.callee.name, e);
+        const errorTitle = "UnknownError";
+        const errorMessage = "Impossible to set the language to english";
+        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
     }
 };
 
@@ -184,31 +186,29 @@ VerseMaker.prototype.setBibleHyperlinksEnglish = function setBibleHyperlinksEngl
  * Turns all the references to the Bible in the document to an hyperlink to the actual
  * Bible digital verse in bible.com with the help of the method setBibleHyperlinks()
  * and it specifies that the referenced Bible verses must be in the Reina Valera de 1960 (Spanish),
- * it acomplish this thought the idiomID global parameter
+ * it accomplish this through the idiomID global parameter
  *
  * @author Obed Vazquez Lopez
  * @since 27/Jul/2016
- * @throws VerseMakerException Uknown Exception
+ * @throws VerseMakerException Unknown Exception
  */
 VerseMaker.prototype.setBibleHyperlinksSpanish = function setBibleHyperlinksSpanish() {
-    Logger.log(this.name + "." + arguments.callee.name + "() :: ");
+    const methodName = 'setBibleHyperlinksSpanish';
+    Logger.log(this.constructor.name + "." + methodName + "() :: ");
     try {
         idiomID = 149;
-        var versesFoundCounter=this.setBibleHyperlinks();
-        if(versesFoundCounter==0){
-            this.alert("No se ha encontrado ninguna cita Biblica, si necesitas ayuda ve al menu de About para aprender a hacer tu propia cita bilica.","Oops!");
-        }else{
-            this.alert(versesFoundCounter+" versiculos se han establecio como hypervinculos a la version RVR60.","Exito");
+        const versesFoundCounter = this.setBibleHyperlinks();
+        if(versesFoundCounter === 0) {
+            this.alert("No se ha encontrado ninguna cita Bíblica, si necesitas ayuda ve al menú de About para aprender a hacer tu propia cita bíblica.","Oops!");
+        } else {
+            this.alert(versesFoundCounter + " versículos se han establecido como hipervínculos a la versión RVR60.","Éxito");
         }
-
     } catch (e) {
-        var errorTitle = "UnknownError";
-        var errorMessage = "Impossible to set the language to english";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, arguments.callee.name, e);
+        const errorTitle = "UnknownError";
+        const errorMessage = "Impossible to set the language to spanish";
+        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
     }
 };
-
-
 
 /**
  * Turns all the references to the Bible in the document to an hyperlink to the actual
@@ -221,38 +221,38 @@ VerseMaker.prototype.setBibleHyperlinksSpanish = function setBibleHyperlinksSpan
  * @throws ValidationException In case of the initial parameters has not being set (this should not occur).
  */
 VerseMaker.prototype.setBibleHyperlinks = function setBibleHyperlinks() {
-    Logger.log(this.name + "." + arguments.callee.name + "() :: ");
-    if (idiomID === null) {
-        var errorMessage = "The language has not being set. This is an unexpected Error, please provide feedback on its occurrence.";
+    const methodName = 'setBibleHyperlinks';
+    Logger.log(this.constructor.name + "." + methodName + "() :: ");
+    if (idiomID === null || idiomID === undefined) {
+        const errorMessage = "The language has not being set. This is an unexpected Error, please provide feedback on its occurrence.";
         throw {
             name: "ValidationError",
             message: errorMessage,
-            methodName: arguments.callee.name,
+            methodName: methodName,
             toString: function() {
-                return ("Exception " + this.name + " at " + this.constructor.name + "." + arguments.callee.name + "() ::" + this.lineNumber + ":: " + this.message);
+                return ("Exception " + this.name + " at " + VerseMaker.name + "." + methodName + "() :: " + this.message);
             }
         };
     }
     try {
-        var versesFoundCounter=0;
-        var doc = DocumentApp.getActiveDocument();
-        for (var i = 0; i < doc.getNumChildren(); i++) {
-            var element = doc.getBody().getChild(i);
-            var textElem = element.asText();
-            versesFoundCounter=versesFoundCounter+this.findBooks(textElem);
+        let versesFoundCounter = 0;
+        const doc = DocumentApp.getActiveDocument();
+        for (let i = 0; i < doc.getNumChildren(); i++) {
+            const element = doc.getBody().getChild(i);
+            const textElem = element.asText();
+            versesFoundCounter = versesFoundCounter + this.findBooks(textElem);
         }
         return versesFoundCounter;
-
     } catch (e) {
-        var errorTitle = "UnknownError";
-        var errorMessage = "Impossible to set the Bible Hyperlinks due to an unknown issue.";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, arguments.callee.name, e);
+        const errorTitle = "UnknownError";
+        const errorMessage = "Impossible to set the Bible Hyperlinks due to an unknown issue.";
+        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
     }
 };
 
 /**
  * The solely intention of this method is to find the actual regex in the physical document,
- * for this, the regex  must be preconfigured and the method will call the setLinkUrl() function
+ * for this, the regex must be preconfigured and the method will call the setLinkUrl() function
  * to turn all of the occurrences as Hyperlinks in the given text element from the document.
  *
  * @author Oscar Villarreal
@@ -262,37 +262,36 @@ VerseMaker.prototype.setBibleHyperlinks = function setBibleHyperlinks() {
  * @param {Text} textElem - Text element on the document, more information: https://developers.google.com/apps-script/reference/document/text
  */
 VerseMaker.prototype.findBooks = function findBooks(textElem) {
-    Logger.log(this.name + "." + arguments.callee.name + "(" + textElem + ") :: ");
+    const methodName = 'findBooks';
+    Logger.log(this.constructor.name + "." + methodName + "(" + textElem + ") :: ");
     if (textElem === null) {
         return null;
     }
     try {
+        let versesFoundCounter = 0;
         
-        var versesFoundCounter=0;
-        
-        for (var bibleURLBookName in books) {
-            var bookVersesFoundCounter=0;
+        for (const bibleURLBookName in books) {
+            let bookVersesFoundCounter = 0;
             
-            var bookRegex = books[bibleURLBookName];
-            var range = textElem.findText(bookRegex + allVersesRegex);
+            const bookRegex = books[bibleURLBookName];
+            let range = textElem.findText(bookRegex + allVersesRegex);
             while (range !== null) {
-                var textReference = range.getElement().asText();
-                var start = range.getStartOffset();
-                var end = range.getEndOffsetInclusive();
+                const textReference = range.getElement().asText();
+                const start = range.getStartOffset();
+                const end = range.getEndOffsetInclusive();
                 textReference.setLinkUrl(start, end, this.getURL(bibleURLBookName, textElem, range, bookRegex));
                 bookVersesFoundCounter++;
                 range = textElem.findText(bookRegex + allVersesRegex, range); //find the next match and puts it into the range
             }
             
-            versesFoundCounter=versesFoundCounter+bookVersesFoundCounter;
+            versesFoundCounter = versesFoundCounter + bookVersesFoundCounter;
         }
         
         return versesFoundCounter;
-
     } catch (e) {
-        var errorTitle = "UnknownError";
-        var errorMessage = "Impossible to look for the regex in the element [" + textElem + " ]";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, arguments.callee.name, e);
+        const errorTitle = "UnknownError";
+        const errorMessage = "Impossible to look for the regex in the element [" + textElem + " ]";
+        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
     }
 };
 
@@ -311,21 +310,21 @@ VerseMaker.prototype.findBooks = function findBooks(textElem) {
  * @throws ValidationException In case one of the Parameters is not provided.
  */
 VerseMaker.prototype.getURL = function getURL(bibleURLBookName, textElem, range, bookRegex) {
-    Logger.log(this.name + "." + arguments.callee.name + "(" + bibleURLBookName + "," + textElem + "," + range + "," + bookRegex + ") :: ");
+    const methodName = 'getURL';
+    Logger.log(this.constructor.name + "." + methodName + "(" + bibleURLBookName + "," + textElem + "," + range + "," + bookRegex + ") :: ");
     this.validateGetURLParameters(bibleURLBookName, textElem, range, bookRegex);
 
     try {
         // now using this https://www.bible.com/bible/149/MAT.6.RVR1960
-        var urlToReturn = "www.bible.com/bible/" + idiomID + "/" + bibleURLBookName + "." +
+        const urlToReturn = "www.bible.com/bible/" + idiomID + "/" + bibleURLBookName + "." +
             this.getCurrentVerses(textElem.getText().substring(
                 range.getStartOffset(), range.getEndOffsetInclusive() + 1), bibleURLBookName, bookRegex);
-        Logger.log(this.name + "." + arguments.callee.name + "(" + bibleURLBookName + "," + textElem + "," + range + "," + bookRegex + ") :: returnValue= " + urlToReturn);
+        Logger.log(this.constructor.name + "." + methodName + "(" + bibleURLBookName + "," + textElem + "," + range + "," + bookRegex + ") :: returnValue= " + urlToReturn);
         return urlToReturn;
-
     } catch (e) {
-        var errorTitle = "UnknownError";
-        var errorMessage = "Impossible to complete the operation with parameter(s) [" + bibleURLBookName + "," + textElem + "," + range + "," + bookRegex + "]";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, arguments.callee.name, e);
+        const errorTitle = "UnknownError";
+        const errorMessage = "Impossible to complete the operation with parameter(s) [" + bibleURLBookName + "," + textElem + "," + range + "," + bookRegex + "]";
+        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
     }
 };
 
@@ -341,30 +340,30 @@ VerseMaker.prototype.getURL = function getURL(bibleURLBookName, textElem, range,
  * @throws ValidationException In case one of the Parameters is not provided.
  */
 VerseMaker.prototype.validateGetURLParameters = function validateGetURLParameters(bibleURLBookName, textElem, range, bookRegex) {
-    Logger.log(this.name + "." + arguments.callee.name + "(" + bibleURLBookName + "," + textElem + "," + range + "," + bookRegex + ") :: ");
-    var errorTitle;
-    var errorMessage;
+    const methodName = 'validateGetURLParameters';
+    Logger.log(this.constructor.name + "." + methodName + "(" + bibleURLBookName + "," + textElem + "," + range + "," + bookRegex + ") :: ");
+    let errorMessage;
     if (bibleURLBookName === null || bibleURLBookName === "") {
-        errorMessage = "The Name of the Book on http://bible.com was not provided. Try with abreviations like 'Gen' (for Genesis)";
-        throw new ValidationException(errorMessage, this.constructor.name, arguments.callee.name, e);
+        errorMessage = "The Name of the Book on http://bible.com was not provided. Try with abbreviations like 'Gen' (for Genesis)";
+        throw new ValidationException(errorMessage, this.constructor.name, methodName, null);
     } else if (textElem === null || textElem === "") {
         errorMessage = "The TextElement object must be provided in order to be able to get the verse to obtain the final URL. More info:https://developers.google.com/apps-script/reference/document/text";
-        throw new ValidationException(errorMessage, this.constructor.name, arguments.callee.name, e);
+        throw new ValidationException(errorMessage, this.constructor.name, methodName, null);
     } else if (range === null || range === "") {
         errorMessage = "The range parameter must be provided to know where to insert the link. More info: https://developers.google.com/apps-script/reference/document/range-element.";
-        throw new ValidationException(errorMessage, this.constructor.name, arguments.callee.name, e);
+        throw new ValidationException(errorMessage, this.constructor.name, methodName, null);
     } else if (bookRegex === null || bookRegex === "") {
-        errorMessage = "The bookRegex is the way to find the book name, and must be provided to continue with the proccess. You can use this variable to identify them: allVersesRegex";
-        throw new ValidationException(errorMessage, this.constructor.name, arguments.callee.name, e);
+        errorMessage = "The bookRegex is the way to find the book name, and must be provided to continue with the process. You can use this variable to identify them: allVersesRegex";
+        throw new ValidationException(errorMessage, this.constructor.name, methodName, null);
     }
 };
 
 /**
- * Obtains the formated verse section of the URL to insert the link.
+ * Obtains the formatted verse section of the URL to insert the link.
  *
  * @author Obed Vazquez
  * @since 09/Apr/2016
- * @param {string} verse - Any tipe of bible verse (ful or abbreviated), ie: Jhn 1.1 or John 1.1 or Juan 1.1, Jn 1.1-2, etc.
+ * @param {string} verse - Any type of bible verse (full or abbreviated), ie: Jhn 1.1 or John 1.1 or Juan 1.1, Jn 1.1-2, etc.
  * @param {string} bibleURLBookName - The bible.
  * @param {string} bookRegex - The regex of the Bible book name.
  * @throws ValidationException In case any of the parameters is not provided.
@@ -372,34 +371,33 @@ VerseMaker.prototype.validateGetURLParameters = function validateGetURLParameter
  * @version 15/Mar/2018
  */
 VerseMaker.prototype.getCurrentVerses = function getCurrentVerses(verse, bibleURLBookName, bookRegex) {
-    Logger.log(this.name + "." + arguments.callee.name + "(" + verse + "," + bibleURLBookName + "," + bookRegex + ") :: ");
+    const methodName = 'getCurrentVerses';
+    Logger.log(this.constructor.name + "." + methodName + "(" + verse + "," + bibleURLBookName + "," + bookRegex + ") :: ");
     this.validateGetURLParameters(bibleURLBookName, "textElem", "range", bookRegex);
     if (verse === null || verse === "") {
-        errorMessage = "the verse must be provided in order to format it. it can be any verse in the Bible in any format";
-        throw new ValidationException(errorMessage, this.constructor.name, arguments.callee.name, e);
+        const errorMessage = "the verse must be provided in order to format it. it can be any verse in the Bible in any format";
+        throw new ValidationException(errorMessage, this.constructor.name, methodName, null);
     }
     try {
-
-        var regexExpression = new RegExp(bookRegex+"[\\.]?", "g");
-        var chaptersAndVerses = verse.replace(regexExpression, "");
+        const regexExpression = new RegExp(bookRegex + "[\\.]?", "g");
+        let chaptersAndVerses = verse.replace(regexExpression, "");
         chaptersAndVerses = chaptersAndVerses.replace(/:/g, ".");
         //eliminating spaces on the URL (previously)
         chaptersAndVerses = chaptersAndVerses.replace(/\s/g, "");
 
         if (bibleURLBookName === "jud" && (verse.indexOf("1.") <= -1)) {
-            chaptersAndVerses = "1."+chaptersAndVerses;
+            chaptersAndVerses = "1." + chaptersAndVerses;
         }
 
         chaptersAndVerses = chaptersAndVerses.replace(/;/g, ",");
 
-        var returnValue = chaptersAndVerses.trim();
-        Logger.log(this.name + "." + arguments.callee.name + "(" + verse + "," + bibleURLBookName + "," + bookRegex + ") :: returnValue= " + returnValue);
+        const returnValue = chaptersAndVerses.trim();
+        Logger.log(this.constructor.name + "." + methodName + "(" + verse + "," + bibleURLBookName + "," + bookRegex + ") :: returnValue= " + returnValue);
         return returnValue;
-
     } catch (e) {
-        var errorTitle = "UnknownError";
-        var errorMessage = "Impossible to complete the operation with parameter(s) [" + verse + "," + bibleURLBookName + "," + bookRegex + "]";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, arguments.callee.name, e);
+        const errorTitle = "UnknownError";
+        const errorMessage = "Impossible to complete the operation with parameter(s) [" + verse + "," + bibleURLBookName + "," + bookRegex + "]";
+        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
     }
 };
 
@@ -412,98 +410,92 @@ VerseMaker.prototype.getCurrentVerses = function getCurrentVerses(verse, bibleUR
  * @param {string} [title] - Title of the alert.
  */
 VerseMaker.prototype.alert = function alert(message, title) {
-    //DocumentApp.getUi().alert(message);
-
+    const methodName = 'alert';
     try {
-        var ui = DocumentApp.getUi();
-        var titulo = title || "Information";
-        var result = ui.alert(
+        const ui = DocumentApp.getUi();
+        const titulo = title || "Information";
+        const result = ui.alert(
             titulo,
             message,
             ui.ButtonSet.OK);
-
     } catch (e) {
-        var errorTitle = "UnknownError";
-        var errorMessage = "Impossible to alert the message [" + message + "]";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, arguments.callee.name, e);
+        const errorTitle = "UnknownError";
+        const errorMessage = "Impossible to alert the message [" + message + "]";
+        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
     }
 };
 
-
-
-
-
-
 function onOpen() {
-    try{
-        var ui=DocumentApp.getUi();
-        ui.createMenu("VerseMaker").
-            addSubMenu(ui.createMenu("Set Hyperlinks").
-                addItem("Spanish [Español]", "spanish").
-                addItem("English", "english")).
-            addItem("About", "help").addToUi();
-    }catch(e){
-        if(devMode){
-            Logger.log(e +" -> "+ e.lineNumber);
-            DocumentApp.getUi().alert("Imposible to set up VerseMaker Add-on","Error");//No se por que no ejecuta esto :S
-        }else{
+    try {
+        const ui = DocumentApp.getUi();
+        ui.createMenu("VerseMaker")
+            .addSubMenu(ui.createMenu("Set Hyperlinks")
+                .addItem("Spanish [Español]", "spanish")
+                .addItem("English", "english"))
+            .addItem("About", "help")
+            .addToUi();
+    } catch (e) {
+        if (devMode) {
+            Logger.log(e + " -> " + (e.lineNumber || 'unknown line'));
+            DocumentApp.getUi().alert("Impossible to set up VerseMaker Add-on", "Error");
+        } else {
             try {
                 exceptionMail(e);
             } catch (ex) {
-                Logger.log(e +" -> "+ e.lineNumber);
-                Logger.log(ex +" -> "+ ex.lineNumber);
-                DocumentApp.getUi().alert("An Error has being found, please report it to bible.verse.maker@gmail.com"); //pass v3r53m4k3r
+                Logger.log(e + " -> " + (e.lineNumber || 'unknown line'));
+                Logger.log(ex + " -> " + (ex.lineNumber || 'unknown line'));
+                DocumentApp.getUi().alert("An Error has been found, please report it to bible.verse.maker@gmail.com");
             }
         }
     }
 }
 
-function getMenuStructure(){
-    var menu={
-            name:"VerseMaker",
-            functionName:"",
-            submenus:[
-                {
-                    name:"Set Hyperlinks",
-                    functionName:"",
-                    submenus:[
-                        {
-                            name:"Spanish [Español]",
-                            functionName:"spanish",
-                            submenus:[]
-                        },{
-                            name:"English",
-                            functionName:"english",
-                            submenus:[]
-                        }
-                    ]
-                },{
-                        name:"Help",
-                        functionName:"help",
-                        submenus:[]
+function getMenuStructure() {
+    const menu = {
+        name: "VerseMaker",
+        functionName: "",
+        submenus: [
+            {
+                name: "Set Hyperlinks",
+                functionName: "",
+                submenus: [
+                    {
+                        name: "Spanish [Español]",
+                        functionName: "spanish",
+                        submenus: []
+                    }, {
+                        name: "English",
+                        functionName: "english",
+                        submenus: []
                     }
-            
-            ]
+                ]
+            }, {
+                name: "Help",
+                functionName: "help",
+                submenus: []
+            }
+        ]
     };
     return menu;
 }
 
-function createMenu(menu){
-    var uiMenu = DocumentApp.getUi().createMenu(menu.name);
-    addSubmenus(uiMenu,menu.submenus);
+function createMenu(menu) {
+    const uiMenu = DocumentApp.getUi().createMenu(menu.name);
+    addSubmenus(uiMenu, menu.submenus);
     return uiMenu;
 }
-function addSubmenus(uiMenu,submenus){
-    if(submenus===null)
+
+function addSubmenus(uiMenu, submenus) {
+    if (submenus === null)
         return;
-        
-    for(var i=0;i<submenus.length;i++) {
-        menu=submenus[i];
-        if(menu.submenus.length>0){
-            var uiSubmenu=DocumentApp.getUi().createMenu(menu.name);
-            addSubmenus(uiSubmenu,menu.submenus);
+
+    for (let i = 0; i < submenus.length; i++) {
+        const menu = submenus[i];
+        if (menu.submenus.length > 0) {
+            const uiSubmenu = DocumentApp.getUi().createMenu(menu.name);
+            addSubmenus(uiSubmenu, menu.submenus);
             uiMenu.addSubMenu(uiSubmenu);
-        }else{
+        } else {
             uiMenu.addItem(menu.name, menu.functionName).addToUi();
         }
     }
@@ -511,19 +503,19 @@ function addSubmenus(uiMenu,submenus){
 
 function english() {
     try {
-        var verseMaker = new VerseMaker();
+        const verseMaker = new VerseMaker();
         verseMaker.setBibleHyperlinksEnglish();
     } catch (e) {
-        if(devMode){
-            Logger.log(e +" -> "+ e.lineNumber);
-            DocumentApp.getUi().alert("An Error has being found, please check the logs of the plug-in"); //pass v3r53m4k3r
-        }else{
+        if (devMode) {
+            Logger.log(e + " -> " + (e.lineNumber || 'unknown line'));
+            DocumentApp.getUi().alert("An Error has been found, please check the logs of the plug-in");
+        } else {
             try {
                 exceptionMail(e);
             } catch (ex) {
                 Logger.log(e);
                 Logger.log(ex);
-                DocumentApp.getUi().alert("An Error has being found, please report it to bible.verse.maker@gmail.com"); //pass v3r53m4k3r
+                DocumentApp.getUi().alert("An Error has been found, please report it to bible.verse.maker@gmail.com");
             }
         }
     }
@@ -531,74 +523,70 @@ function english() {
 
 function spanish() {
     try {
-        var verseMaker = new VerseMaker();
+        const verseMaker = new VerseMaker();
         verseMaker.setBibleHyperlinksSpanish();
-        
     } catch (e) {
-        if(devMode){
-            Logger.log(e +" -> "+ e.lineNumber);
-            DocumentApp.getUi().alert("An Error has being found, please check the logs of the plug-in"); //pass v3r53m4k3r
-        }else{
+        if (devMode) {
+            Logger.log(e + " -> " + (e.lineNumber || 'unknown line'));
+            DocumentApp.getUi().alert("An Error has been found, please check the logs of the plug-in");
+        } else {
             try {
                 exceptionMail(e);
             } catch (ex) {
                 Logger.log(e);
                 Logger.log(ex);
-                DocumentApp.getUi().alert("An Error has being found, please report it to bible.verse.maker@gmail.com"); //pass v3r53m4k3r
+                DocumentApp.getUi().alert("An Error has been found, please report it to bible.verse.maker@gmail.com");
             }
         }
     }
 }
 
-function help(){
+function help() {
     try {
-        var htmlOutput = HtmlService
-             .createHtmlOutputFromFile("About--how-to.html")
-             .setSandboxMode(HtmlService.SandboxMode.IFRAME)
-             .setWidth(900)
-             .setHeight(400);
+        const htmlOutput = HtmlService
+            .createHtmlOutputFromFile("About--how-to.html")
+            .setSandboxMode(HtmlService.SandboxMode.IFRAME)
+            .setWidth(900)
+            .setHeight(400);
         DocumentApp.getUi().showModalDialog(htmlOutput, 'Help');
     } catch (e) {
-        if(devMode){
-            Logger.log(e +" -> "+ e.lineNumber);
-            DocumentApp.getUi().alert("An Error has being found, please check the logs of the plug-in"); //pass v3r53m4k3r
-        }else{
+        if (devMode) {
+            Logger.log(e + " -> " + (e.lineNumber || 'unknown line'));
+            DocumentApp.getUi().alert("An Error has been found, please check the logs of the plug-in");
+        } else {
             try {
                 exceptionMail(e);
             } catch (ex) {
-                Logger.log(e +" -> "+ e.lineNumber);
-                Logger.log(ex +" -> "+ ex.lineNumber);
-                DocumentApp.getUi().alert("An Error has being found, please report it to bible.verse.maker@gmail.com"); //pass v3r53m4k3r
+                Logger.log(e + " -> " + (e.lineNumber || 'unknown line'));
+                Logger.log(ex + " -> " + (ex.lineNumber || 'unknown line'));
+                DocumentApp.getUi().alert("An Error has been found, please report it to bible.verse.maker@gmail.com");
             }
         }
     }
-    //make a Bible Verse citation you can look at https://en.wikipedia.org/wiki/Bible_citation
 }
-
-
 
 function exceptionMail(trace) {
     try {
-        var googleLogoUrl = "http://www.google.com/intl/en_com/images/srpr/logo3w.png";
-        var googleLogoBlob = UrlFetchApp
+        const googleLogoUrl = "http://www.google.com/intl/en_com/images/srpr/logo3w.png";
+        const googleLogoBlob = UrlFetchApp
             .fetch(googleLogoUrl)
             .getBlob();
         MailApp.sendEmail({
-                to: "bible.verse.maker@gmail.com",
-                subject: "Exception on VerseMaker User Add-on",
-                htmlBody: "Pelas vato:<br>" + trace + "<br><br>" + "<img src='cid:googleLogo'> ",
-                inlineImages: {
-                    googleLogo: googleLogoBlob
-                }
-            });
+            to: "bible.verse.maker@gmail.com",
+            subject: "Exception on VerseMaker User Add-on",
+            htmlBody: "Exception details:<br>" + trace + "<br><br>" + "<img src='cid:googleLogo'> ",
+            inlineImages: {
+                googleLogo: googleLogoBlob
+            }
+        });
     } catch (e) {
-        var exceptionMessage = "Impossible to send the error trace mail due to an Uknown Error.";
+        const exceptionMessage = "Impossible to send the error trace mail due to an Unknown Error.";
         throw {
             name: "Fatal Error",
             message: exceptionMessage,
-            methodName: arguments.callee.name,
+            methodName: "exceptionMail",
             toString: function() {
-                return ("Exception " + this.name + " at " + this.constructor.name + "." + arguments.callee.name + "() ::" + this.lineNumber + ":: " + this.message);
+                return ("Exception " + this.name + " at exceptionMail() :: " + this.message);
             }
         };
     }
