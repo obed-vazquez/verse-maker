@@ -29,6 +29,7 @@ indirectly to the subject of this project._
 
 ### 2.1) Summary of set up
 You will require access to the project tools and they are not listed or described in here.
+To protect the main branch of the repo please execute the [text](main-protection-win.bat) file after cloning the repo.
 
 ## 4) What are the Contribution guidelines?
 
