@@ -1,6 +1,6 @@
 # VIRO & VALO Verse Maker
 ### 📜 English Description
-This Google Apps Script is part of a Google Docs add-on called VerseMaker. Its purpose is to automatically detect Bible verse references within a document and turn them into clickable hyperlinks pointing to the corresponding passage on Bible.com.
+This Google Apps Script is part of a Google Docs add-on called VerseMaker. Its purpose is to automatically detect Bible verse references within a document and convert them into clickable hyperlinks that point to the corresponding passage on Bible.com.
 
 The script uses a set of predefined regular expressions to recognize abbreviations and full names of Bible books in multiple languages (Spanish and English), followed by chapter and verse patterns. Once detected, it converts each reference into a hyperlink using either the Reina-Valera 1960 (Spanish, ID 149) or King James Version (English, ID 1), depending on the selected option in the custom menu.
 
@@ -17,19 +17,20 @@ El complemento se integra en Google Docs añadiendo un menú llamado "VerseMaker
 
 ### 1.1) Quick summary
 
-This requires Google infraestructure to be deployed.
+This requires Google infrastructure to be deployed.
 
 ### 1.2) Disclosure
 _We hereby certify that, to the best of our knowledge,
-neither we nor any individual or entity with whom or which I have a significant working
+neither we nor any individual or entity with whom or with which we have a significant working
 relationship have (has) received something of value from a commercial party related directly or
 indirectly to the subject of this project._
+https://obed-vazquez.github.io/verse-maker/
 
 ## 2) How do I get set up? ###
 
-### 2.1) Summary of set up
-You will require access to the project tools and they are not listed or described in here.
-To protect the main branch of the repo please execute the [main-protection](main-protection-win.bat) file after cloning the repo.
+### 2.1) Summary of setup
+You will require access to the project tools, and they are not listed or described here.
+To protect the main branch of the repo, please execute the [main-protection](main-protection-win.bat) file after cloning the repo.
 
 ## 4) What are the Contribution guidelines?
 
@@ -54,6 +55,6 @@ _Please ask for the code standard to use as a guideline and reflect it in the pr
 <tr><td>Community</td><td> send us a message in <a href='https://discord.gg/qyvzfUgYxm'>our Discord Server</a></td></tr>
 </table>
 
->Please, contact us if you want to help; In general, we are developing, maintaining, and supporting this project
+>Please, contact us if you want to help. In general, we are developing, maintaining, and supporting this project
 on our own with no help or support from anyone; any tip, comment, change, or help in general is well-received.
 
