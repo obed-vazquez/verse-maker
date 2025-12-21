@@ -178,7 +178,10 @@ VerseMaker.prototype.setBibleHyperlinksEnglish = function setBibleHyperlinksEngl
     } catch (e) {
         const errorTitle = "UnknownError";
         const errorMessage = "Impossible to set the language to english";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
+        const rootError = new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
+        Logger.log("FULL STACK TRACE:");
+        Logger.log(rootError.stack || rootError);
+        throw rootError;
     }
 };
 
@@ -206,7 +209,10 @@ VerseMaker.prototype.setBibleHyperlinksSpanish = function setBibleHyperlinksSpan
     } catch (e) {
         const errorTitle = "UnknownError";
         const errorMessage = "Impossible to set the language to spanish";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
+        const rootError = new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
+        Logger.log("FULL STACK TRACE:");
+        Logger.log(rootError.stack || rootError);
+        throw rootError;
     }
 };
 
