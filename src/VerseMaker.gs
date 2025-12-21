@@ -255,18 +255,14 @@ VerseMaker.prototype.setBibleHyperlinks = function setBibleHyperlinks() {
  * for this, the regex must be preconfigured and the method will call the setLinkUrl() function
  * to turn all of the occurrences as Hyperlinks in the given text element from the document.
  *
- * @author Oscar Villarreal
- * @since 26/01/2016
- * @modifies Obed Vazquez
- * @version 28/Jul/2016
  * @param {Text} textElem - Text element on the document, more information: https://developers.google.com/apps-script/reference/document/text
  */
 VerseMaker.prototype.findBooks = function findBooks(textElem) {
     const methodName = 'findBooks';
     Logger.log(this.constructor.name + "." + methodName + "(" + textElem + ") :: ");
-    if (textElem === null) {
-        return null;
-    }
+    if (textElem === null) return null;
+    textElem = textElem.replaceAll("–", "-");
+    
     try {
         let versesFoundCounter = 0;
         
