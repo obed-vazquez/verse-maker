@@ -267,8 +267,6 @@ VerseMaker.prototype.findBooks = function findBooks(textElem) {
     const methodName = 'findBooks';
     Logger.log(this.constructor.name + "." + methodName + "(" + textElem + ") :: ");
     if (textElem === null) return null;
-    textElem = textElem.replaceAll("–", "-");
-    
     try {
         let versesFoundCounter = 0;
         
