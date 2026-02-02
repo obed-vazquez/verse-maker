@@ -1,46 +1,59 @@
 /*
  * Module:  		VerseMakerException.gs
- * Author mail:		obed.vazquez@gmail.com
- * GoogleProyect: 	https://script.google.com/d/14Qrk-vG5uDw_2Cws9NePZEazz8oEEVxHUlAKP_pp4Iut6PrF83YmYOtY/edit
- * License: 		(Spanish) http://creativecommons.org/licenses/by-nc/2.5/mx/
- * Legal Code:		(Spanish) http://creativecommons.org/licenses/by-nc/2.5/mx/legalcode
- * Updated:         Migrated to V8 compatibility
+ * Updated:         Fixed stack trace chaining for GAS V8
  */
 
 /**
  * Generic VerseMaker Project Exception.
  * Use it when throwing generic errors in your methods.
- * @author Obed Vazquez Lopez
- * @since 26/01/2016
- * @ProyectKey MNuj1w5fvwhzODeTTPfEMYnd8W73qGbVI
+ *
+ * @param {string} title
+ * @param {string} message
+ * @param {string} srcClass
+ * @param {string} srcMethod
+ * @param {Error}  originalError
  */
-function VerseMakerException(title, message, srcClass, srcMethod, stack) {
-	this.fileName = srcClass + "." || "";
-	this.srcMethod = srcMethod + "()" || "";
-	this.stack = stack !== null && stack !== undefined ? "\ncaused by: " + stack.toString() : "";
-	this.name = title || "UnknownException";
-	this.message = message || "Impossible to complete the operation";
-	Error.call();
+function VerseMakerException(title, message, srcClass, srcMethod, originalError) {
+
+  // Call native Error constructor to initialize stack
+  Error.call(this, message);
+
+  this.name = title || "UnknownException";
+  this.message = message || "Impossible to complete the operation";
+
+  this.fileName = srcClass ? srcClass + "." : "";
+  this.srcMethod = srcMethod ? srcMethod + "()" : "";
+
+  // Preserve original stack trace if available
+  if (originalError instanceof Error && originalError.stack) {
+    this.stack =
+      this.name + ": " + this.message +
+      "\n    at " + this.fileName + this.srcMethod +
+      "\n--- Caused by ---\n" +
+      originalError.stack;
+  } else {
+    // Fallback: keep whatever stack Error() generated
+    this.stack = this.stack || "";
+  }
 }
 
 /**
- * Inherits from Error javascript class through VerseMakerException.
- * 
- * @author Obed Vazquez Lopez
- * @since 26/01/2016
+ * Inherits from native Error
  */
 VerseMakerException.prototype = Object.create(Error.prototype);
-VerseMakerException.prototype.constructor = Error;
+VerseMakerException.prototype.constructor = VerseMakerException;
 
- /**
- * toString() Overridden method from Object.
- *
- * @author Obed Vazquez Lopez
- * @since 13/12/2014
- * @return {string} Exception detailed description represented by this instance.
+/**
+ * Overridden toString()
+ * @return {string}
  */
-VerseMakerException.prototype.toString = function toString() {
-	return this.name + " at " + this.fileName + this.srcMethod + ": " +
-		(this.lineNumber === null || this.lineNumber === 0 || this.lineNumber === undefined ? "" : this.lineNumber + " - ") +
-		this.message + this.stack;
-}
+VerseMakerException.prototype.toString = function () {
+  return this.stack || (
+    this.name +
+    " at " +
+    this.fileName +
+    this.srcMethod +
+    ": " +
+    this.message
+  );
+};

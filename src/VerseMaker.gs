@@ -141,7 +141,7 @@ const books = {
  * @author Obed Vazquez
  * @since 26/01/2016
  */
-const allVersesRegex = "[\\.]?[\\s]?[\\d]*[:|\\.]?[\\d]+(([-]{1}[\\d]+)?([,][\\s]?[\\d]+([-]{1}[\\d]+)?)*)?"; 
+const allVersesRegex = "[\\.]?[\\s]?[\\d]*[:|\\.]?[\\d]+(([-|–]{1}[\\d]+)?([,][\\s]?[\\d]+([-|–]{1}[\\d]+)?)*)?"; 
 //bible.com no acepta referencias entre varios capitulos por ejemplo: Jn 1:3-2:3  Ó Jn 3:2;4:1 (con el ultimo se identificaria como: Jn 3:2,4)
 //El ; se elimino para que solo identifique la , pues es muy claro que es estandar.
 
@@ -178,7 +178,10 @@ VerseMaker.prototype.setBibleHyperlinksEnglish = function setBibleHyperlinksEngl
     } catch (e) {
         const errorTitle = "UnknownError";
         const errorMessage = "Impossible to set the language to english";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
+        const rootError = new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
+        Logger.log("FULL STACK TRACE:");
+        Logger.log(rootError.stack || rootError);
+        throw rootError;
     }
 };
 
@@ -206,7 +209,10 @@ VerseMaker.prototype.setBibleHyperlinksSpanish = function setBibleHyperlinksSpan
     } catch (e) {
         const errorTitle = "UnknownError";
         const errorMessage = "Impossible to set the language to spanish";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
+        const rootError = new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
+        Logger.log("FULL STACK TRACE:");
+        Logger.log(rootError.stack || rootError);
+        throw rootError;
     }
 };
 
@@ -255,18 +261,12 @@ VerseMaker.prototype.setBibleHyperlinks = function setBibleHyperlinks() {
  * for this, the regex must be preconfigured and the method will call the setLinkUrl() function
  * to turn all of the occurrences as Hyperlinks in the given text element from the document.
  *
- * @author Oscar Villarreal
- * @since 26/01/2016
- * @modifies Obed Vazquez
- * @version 28/Jul/2016
  * @param {Text} textElem - Text element on the document, more information: https://developers.google.com/apps-script/reference/document/text
  */
 VerseMaker.prototype.findBooks = function findBooks(textElem) {
     const methodName = 'findBooks';
     Logger.log(this.constructor.name + "." + methodName + "(" + textElem + ") :: ");
-    if (textElem === null) {
-        return null;
-    }
+    if (textElem === null) return null;
     try {
         let versesFoundCounter = 0;
         
@@ -317,7 +317,7 @@ VerseMaker.prototype.getURL = function getURL(bibleURLBookName, textElem, range,
     try {
         // now using this https://www.bible.com/bible/149/MAT.6.RVR1960
         const urlToReturn = "www.bible.com/bible/" + idiomID + "/" + bibleURLBookName + "." +
-            this.getCurrentVerses(textElem.getText().substring(
+            this.getCurrentVerses(textElem.getText().replace(/–/g, "-").substring(
                 range.getStartOffset(), range.getEndOffsetInclusive() + 1), bibleURLBookName, bookRegex);
         Logger.log(this.constructor.name + "." + methodName + "(" + bibleURLBookName + "," + textElem + "," + range + "," + bookRegex + ") :: returnValue= " + urlToReturn);
         return urlToReturn;
