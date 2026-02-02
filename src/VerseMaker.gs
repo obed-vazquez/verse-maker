@@ -112,7 +112,7 @@ const books = {
     "1co": "\\b(" + regexFirstOf + "(Corintios|Cor|Co|Corinthians))",
     "2co": "\\b((((2(((nd)|[ao])[\\s]))|((2|((II)|(ii)))[\\s]?))|((([Ss][Ee][Cc][Oo][Nn][Dd]([\\s][Oo][Ff])?)|([Ss][Ee][Gg][Uu][Nn][Dd][AaOo]([\\s][Dd][Ee])?))[\\s]))(Corintios|Cor|Co|Corinthians))",
     "gal": "\\b([Gg][\u00c1\u00e1Aa][Ll][Aa][Tt][Aa][Ss]|[Gg][Aa][Ll]|[Gg][Ll]|[Gg][Aa]|[Gg][A\u0301])",
-    "ef": "\\b(Efesios|Efe|Ef)",
+    "eph": "\\b([Ee][Ff][Ee][Ss][Ii][Oo][Ss]|[Ee][Pp][Hh][Ee][Ss][Ii][Aa][Nn][Ss]|[Ee][Pp][Hh][Ee]|[Ee][Ff][Ee]|[Ee][Pp][Hh]|[Ee][Ff])",
     "fil": "\\b(Filipenses|Fil|Fl|Flp)",
     "col": "\\b(Colosenses|Colossians|Col)",
     "1th": "\\b(" + regexFirstOf + "(Tesalonicenses|Thessalonians|Tes|Ts|Thess|Th))",
