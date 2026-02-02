@@ -112,7 +112,7 @@ const books = {
     "1co": "\\b(" + regexFirstOf + "(Corintios|Cor|Co|Corinthians))",
     "2co": "\\b((((2(((nd)|[ao])[\\s]))|((2|((II)|(ii)))[\\s]?))|((([Ss][Ee][Cc][Oo][Nn][Dd]([\\s][Oo][Ff])?)|([Ss][Ee][Gg][Uu][Nn][Dd][AaOo]([\\s][Dd][Ee])?))[\\s]))(Corintios|Cor|Co|Corinthians))",
     "gal": "\\b([Gg][\u00c1\u00e1Aa][Ll][Aa][Tt][Aa][Ss]|[Gg][Aa][Ll]|[Gg][Ll]|[Gg][Aa]|[Gg][A\u0301])",
-    "ef": "\\b(Efesios|Efe|Ef)",
+    "eph": "\\b([Ee][Ff][Ee][Ss][Ii][Oo][Ss]|[Ee][Pp][Hh][Ee][Ss][Ii][Aa][Nn][Ss]|[Ee][Pp][Hh][Ee]|[Ee][Ff][Ee]|[Ee][Pp][Hh]|[Ee][Ff])",
     "fil": "\\b(Filipenses|Fil|Fl|Flp)",
     "col": "\\b(Colosenses|Colossians|Col)",
     "1th": "\\b(" + regexFirstOf + "(Tesalonicenses|Thessalonians|Tes|Ts|Thess|Th))",
@@ -140,6 +140,7 @@ const books = {
  * @type {string}
  * @author Obed Vazquez
  */
+
 const allVersesRegex = "[\\.]?[\\s]?[\\d]*[:|\\.]?[\\d]+(([-]{1}[\\d]+)?([,][\\s]?[\\d]+([-]{1}[\\d]+)?)*)?"; 
 /* bible.com does not accept references spanning multiple chapters, for example: Jn 1:3–2:3 or Jn 3:2;4:1 (the latter would be interpreted as Jn 3:2,4).
  * The semicolon was removed so that only the comma is used, since it is clearly the standard.
@@ -178,7 +179,10 @@ VerseMaker.prototype.setBibleHyperlinksEnglish = function setBibleHyperlinksEngl
     } catch (e) {
         const errorTitle = "UnknownError";
         const errorMessage = "Impossible to set the language to english";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
+        const rootError = new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
+        Logger.log("FULL STACK TRACE:");
+        Logger.log(rootError.stack || rootError);
+        throw rootError;
     }
 };
 
@@ -206,7 +210,10 @@ VerseMaker.prototype.setBibleHyperlinksSpanish = function setBibleHyperlinksSpan
     } catch (e) {
         const errorTitle = "UnknownError";
         const errorMessage = "Impossible to set the language to spanish";
-        throw new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
+        const rootError = new VerseMakerException(errorTitle, errorMessage, this.constructor.name, methodName, e);
+        Logger.log("FULL STACK TRACE:");
+        Logger.log(rootError.stack || rootError);
+        throw rootError;
     }
 };
 
@@ -255,18 +262,12 @@ VerseMaker.prototype.setBibleHyperlinks = function setBibleHyperlinks() {
  * for this, the regex must be preconfigured, and the method will call the setLinkUrl() function
  * to turn all of the occurrences into Hyperlinks in the given text element from the document.
  *
- * @author Oscar Villarreal
- * @since 26/01/2016
- * @modifies Obed Vazquez
- * @version 28/Jul/2016
  * @param {Text} textElem - Text element on the document, more information: https://developers.google.com/apps-script/reference/document/text
  */
 VerseMaker.prototype.findBooks = function findBooks(textElem) {
     const methodName = 'findBooks';
     Logger.log(this.constructor.name + "." + methodName + "(" + textElem + ") :: ");
-    if (textElem === null) {
-        return null;
-    }
+    if (textElem === null) return null;
     try {
         let versesFoundCounter = 0;
         
@@ -317,7 +318,7 @@ VerseMaker.prototype.getURL = function getURL(bibleURLBookName, textElem, range,
     try {
         // now using this https://www.bible.com/bible/149/MAT.6.RVR1960
         const urlToReturn = "www.bible.com/bible/" + idiomID + "/" + bibleURLBookName + "." +
-            this.getCurrentVerses(textElem.getText().substring(
+            this.getCurrentVerses(textElem.getText().replace(/–/g, "-").substring(
                 range.getStartOffset(), range.getEndOffsetInclusive() + 1), bibleURLBookName, bookRegex);
         Logger.log(this.constructor.name + "." + methodName + "(" + bibleURLBookName + "," + textElem + "," + range + "," + bookRegex + ") :: returnValue= " + urlToReturn);
         return urlToReturn;
