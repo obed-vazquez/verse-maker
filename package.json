@@ -1,0 +1,23 @@
+{
+  "name": "verse-maker",
+  "version": "1.0.0",
+  "description": "This Google Apps Script is part of a Google Docs add-on called VerseMaker. Its purpose is to automatically detect Bible verse references within a document and convert them into clickable hyperlinks that point to the corresponding passage on Bible.com.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/obed-vazquez/verse-maker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/obed-vazquez/verse-maker/issues"
+  },
+  "homepage": "https://github.com/obed-vazquez/verse-maker#readme",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}

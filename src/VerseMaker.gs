@@ -7,14 +7,14 @@
  * Legal Code:      (Spanish) http://creativecommons.org/licenses/by-nc/2.5/mx/legalcode
  * Updated:         Migrated to V8 compatibility
  */
- 
- /**
- * This is a temporal flag to know if it is working on a Development environment or in production.
- * If the plug-in has being deployed please set this flag into false.
- * @type    {boolean}
- * @author  Obed Vazquez
- * @since   27/07/2016
- */
+
+/**
+* This is a temporal flag to know if it is working on a Development environment or in production.
+* If the plug-in has being deployed please set this flag into false.
+* @type    {boolean}
+* @author  Obed Vazquez
+* @since   27/07/2016
+*/
 const devMode = false;
 
 /**
@@ -64,72 +64,72 @@ const regexThirdOf = "(((3(((rd)|[ao])[\\s]))|((3|(III|(iii)))[\\s]?))|((([Tt][H
  * @since   26/01/2016
  */
 const books = {
-    "gen": "\\b([Gg][Ee][Nn][Ee][Ss][Ii][Ss]|[Gg][\u00c9\u00e9][Nn][Ee][Ss][Ii][Ss]|[Gg][Ee][Nn]|[Gg][\u00c9\u00e9][Nn]|[Gg][Ee]|[Gg][Nn]|[Gg][\u00c9\u00e9])",
-    "exo": "\\b([Ee][Xx][Oo][Dd][Oo]|[Ee][Xx]|[Ee][Xx][Oo]|[\u00c9\u00e9][Xx][Oo][Dd][Oo]|[\u00c9\u00e9][Xx]|[\u00c9\u00e9][Xx][Oo])",
-    "lev": "\\b([Ll][Ee][Vv][Ii][Tt][Ii][Cc][Oo]|[Ll][Ee][Vv][\u00CD\u00ed][Tt][Ii][Cc][Oo]|[Ll][Ee][Vv][Ii][Tt][Ii][Cc]|[Ll][Ee][Vv][\u00CD\u00ed][Tt]|[Ll][Ee][Vv][\u00CD\u00ed]|[Ll][Ee][Vv][Ii][Tt]|[Ll][Ee][Vv][Ii]|[Ll][Ee][Vv]|[Ll][Ee]|[Ll][Vv])",
-    "num": "\\b([Nn][Uu][Mm][Ee][Rr][Oo][Ss]|[Nn][Uu][Mm]|[Nn][Uu]|[Nn][Mm]|[Nn][\u00da\u00fa][Mm][Ee][Rr][Oo][Ss]|[Nn][\u00da\u00fa][Mm]|[Nn][\u00da\u00fa]|[Nn][Uu][Mm][Bb][Ee][Rr][Ss]|[Nn][Bb])",
-    "deu": "\^([Dd][Ee][Uu][Tt][Ee][Rr][Oo][Nn][Oo][Mm][Ii][Oo]|[Dd][Ee][Uu][Tt][Ee][Rr][Oo]|[Dd][Ee][Uu][Tt]|[Dd][Ee][Uu]|[Dd][Ee]|[Dd][Tt]|[Dd][Ee][Uu][Tt][Ee][Rr][Oo][Nn][Oo][Mm][Yy])",
-    "jos": "\\b([Jj][Oo][Ss][Uu][Ee]|[Jj][Oo][Ss]|[Jj][Ss]|[Jj][Oo][Ss][Uu][\u00c9\u00e9]|[Jj][Oo][Ss][Hh][Uu][Aa]|[Jj][Oo][Ss][Hh]|[Jj][Oo][Ss]|[Jj][Ss][Hh])",
-    "jdg": "\\b([Jj][Uu][Ee][Cc][Ee][Ss]|[Jj][Uu][Ee]|[Jj][Uu][Dd][Gg][Ee][Ss]|[Jj][Uu][Dd][Gg]|[Jj][Dd][Gg]|[Jj][Gg]|[Jj][Dd][Gg][Ss])",
-    "rut": "\\b([Rr][Uu][Tt]|[Rr][Uu]|[Rr][Tt]|[Rr][Uu][Tt][Hh]|[Rr][Tt][Hh])",
+    "gen": "\\b([Gg][Ee\u00c9\u00e9][Nn][Ee][Ss][Ii][Ss]|[Gg][Ee\u00c9\u00e9][Nn]|[Gg][Ee\u00c9\u00e9]|[Gg][Nn])",
+    "exo": "\\b([Ee\u00c9\u00e9][Xx][Oo][Dd][Oo]|[Ee\u00c9\u00e9][Xx][Oo]|[Ee\u00c9\u00e9][Xx])",
+    "lev": "\\b([Ll][Ee][Vv][Ii\u00CD\u00ed][Tt][Ii][Cc][Oo]|[Ll][Ee][Vv][Ii\u00CD\u00ed][Tt][Ii][Cc]|[Ll][Ee][Vv][Ii\u00CD\u00ed][Tt]|[Ll][Ee][Vv][Ii\u00CD\u00ed]|[Ll][Ee][Vv]|[Ll][Vv])",
+    "num": "\\b([Nn][Uu\u00da\u00fa][Mm][Ee][Rr][Oo][Ss]|[Nn][Uu][Mm][Bb][Ee][Rr][Ss]|[Nn][Uu\u00da\u00fa][Mm]|[Nn][Mm]|[Nn][Bb])",
+    "deu": "\\b([Dd][Ee][Uu][Tt][Ee][Rr][Oo][Nn][Oo][Mm][Ii][Oo]|[Dd][Ee][Uu][Tt][Ee][Rr][Oo][Nn][Oo][Mm][Yy]|[Dd][Ee][Uu][Tt][Ee][Rr][Oo]|[Dd][Ee][Uu][Tt]|[Dd][Ee][Uu]|[Dd][Ee]|[Dd][Tt])",
+    "jos": "\\b([Jj][Oo][Ss][Uu][Ee\u00c9\u00e9]|[Jj][Oo][Ss][Hh][Uu][Aa]|[Jj][Oo][Ss][Hh]|[Jj][Oo][Ss]|[Jj][Ss][Hh]|[Jj][Ss])",
+    "jdg": "\\b([Jj][Uu][Ee][Cc][Ee][Ss]|[Jj][Uu][Dd][Gg][Ee][Ss]|[Jj][Dd][Gg][Ss]|[Jj][Uu][Dd][Gg]|[Jj][Dd][Gg]|[Jj][Uu][Ee]|[Jj][Gg])",
+    "rut": "\\b([Rr][Uu][Tt][Hh]|[Rr][Uu][Tt]|[Rr][Tt][Hh]|[Rr][Uu]|[Rr][Tt])",
     "1sa": "\\b(" + regexFirstOf + "([Ss][Aa][Mm][Uu][Ee][Ll]|[Ss][Aa][Mm]|[Ss][Aa]|[Ss][Mm]|[Ss]))",
     "2sa": "\\b(" + regexSecondOf + "([Ss][Aa][Mm][Uu][Ee][Ll]|[Ss][Aa][Mm]|[Ss][Aa]|[Ss][Mm]|[Ss]))",
-    "1ki": "\\b(" + regexFirstOf  + "([Rr][Ee][Yy][Ee][Ss]|[Rr][Ee]|[Rr]\\.|[Kk][Ii][Nn][Gg][Ss]|[Kk][Gg][Ss]|[Kk][Ii][Nn]|[Kk][Ii]|[Kk]))",
-    "2ki": "\\b(" + regexSecondOf + "([Rr][Ee][Yy][Ee][Ss]|[Rr][Ee]|[Rr]\\.|[Kk][Ii][Nn][Gg][Ss]|[Kk][Gg][Ss]|[Kk][Ii][Nn]|[Kk][Ii]|[Kk]))",
-    "1ch": "\\b(" + regexFirstOf + "([Cc][Rr][Oo][Nn][Ii][Cc][Aa][Ss]|[Cc][Rr][\u00d3\u00f3][Nn][Ii][Cc][Aa][Ss]|[Cc][Rr][Oo]|[Cc][Rr][\u00d3\u00f3]|[Cc][Rr][\u00d3\u00f3][Nn]|[Cc][Rr]|[Cc][Hh][Rr][Oo][Nn][Ii][Cc][Ll][Ee][Ss]|[Cc][Hh][Rr][Oo][Nn]|[Cc][Hh][Rr]|[Cc][Hh]))",
-    "2ch": "\\b(" + regexSecondOf + "([Cc][Rr][Oo][Nn][Ii][Cc][Aa][Ss]|[Cc][Rr][\u00d3\u00f3][Nn][Ii][Cc][Aa][Ss]|[Cc][Rr][Oo]|[Cc][Rr][\u00d3\u00f3]|[Cc][Rr][\u00d3\u00f3][Nn]|[Cc][Rr]|[Cc][Hh][Rr][Oo][Nn][Ii][Cc][Ll][Ee][Ss]|[Cc][Hh][Rr][Oo][Nn]|[Cc][Hh][Rr]|[Cc][Hh]))",
-    "esd": "\\b([Ee][Ss][Dd][Rr][Aa][Ss]|[Ee][Ss][Dd]|[Ee][Zz][Rr][Aa]|[Ee][Zz][Rr])",
-    // "neh": "",
-    "est": "\\b([Ee][Ss][Tt][Hh][Ee][Rr]|[Ee][Ss][Tt][Hh]|[Ee][Ss][Tt]|[Ee][Ss]|[Ee][Ss][Tt][Ee][Rr])",
-    // "job": "",
-    "psa": "\\b([Ss][Aa][Ll][Mm][Oo][Ss]|[Ss][Aa][Ll][Mm][Oo]|[Ss][Aa][Ll]|[Pp][Ss][Aa][Ll][Mm]|[Pp][Ss][Ll][Mm]|[Pp][Ss]|[Pp][Ss][Aa][Ll][Mm][Ss]|[Pp][Ss][Aa]|[Pp][Ss][Mm]|[Pp][Ss][Mm][Ss]|[Pp][Ss][Ss])",
-    "pro": "\\b([Pp][Rr][Oo][Vv][Ee][Rr][Bb][Ii][Oo][Ss]|[Pp][Rr][Oo][Vv][Ee][Rr][Bb][Ss]|[Pp][Rr][Oo][Vv]|[Pp][Rr][Oo]|[Pp][Rr][Vv]|[Pp][Rr]|[Pp][Vv])",
-    "ecc": "\\b([Ee][Cc][Cc][Ll][Ee][Ss][Ii][Aa][Ss][Tt][Ee][Ss]|[Ee][Cc][Ll][Ee][Ss][Ii][Aa][Ss][Tt][Ee\u00C9\u00e9][Ss]|[Qq][Oo][Hh][Ee][Ll][Ee][Tt][Hh]|[Ee][Cc][Cc][Ll][Ee][Ss]|[Ee][Cc][Cc][Ll]|[Qq][Oo][Hh][Ee][Cc][Ll]|[Ee][Cc])",
-    // "sng": "",
-    "isa": "\\b([Ii][Ss][Aa][\u00cd\u00ed][Aa][Ss]|[Ii][Ss][Aa][Ii][Aa][Ss]|[Ii][Ss][Aa]|[Ii][Ss]|[Ii][Ss][Aa][Ii][Aa][Hh])",
-    "jer": "\\b(Jeremias|Jerem\u00edas|Jer|Je)",
-    // "lam": "",
-    "ezk": "\\b([Ee][Zz][Ee][Kk][Ii][Ee][Ll]|[Ee][Zz][Ee][Kk]|[E][Zz][Ee]|[Ee][Zz][Kk]|[Ee][Zz][Ee][Qq][Uu][Ii][Ee][Ll]|[Ee][Zz][Ee][Qq]|[Ee][Zz][Qq]|[Ee][Zz])",
+    "1ki": "\\b(" + regexFirstOf + "([Rr][Ee][Yy][Ee][Ss]|[Kk][Ii][Nn][Gg][Ss]|[Kk][Gg][Ss]|[Kk][Ii][Nn]|[Rr][Ee]|[Rr]\\.|[Kk][Ii]|[Kk]))",
+    "2ki": "\\b(" + regexSecondOf + "([Rr][Ee][Yy][Ee][Ss]|[Kk][Ii][Nn][Gg][Ss]|[Kk][Gg][Ss]|[Kk][Ii][Nn]|[Rr][Ee]|[Rr]\\.|[Kk][Ii]|[Kk]))",
+    "1ch": "\\b(" + regexFirstOf + "([Cc][Rr][Oo\u00d3\u00f3][Nn][Ii][Cc][Aa][Ss]|[Cc][Hh][Rr][Oo][Nn][Ii][Cc][Ll][Ee][Ss]|[Cc][Rr][Oo\u00d3\u00f3][Nn]|[Cc][Hh][Rr][Oo][Nn]|[Cc][Rr][Oo\u00d3\u00f3]|[Cc][Hh][Rr]|[Cc][Rr]|[Cc][Hh]))",
+    "2ch": "\\b(" + regexSecondOf + "([Cc][Rr][Oo\u00d3\u00f3][Nn][Ii][Cc][Aa][Ss]|[Cc][Hh][Rr][Oo][Nn][Ii][Cc][Ll][Ee][Ss]|[Cc][Rr][Oo\u00d3\u00f3][Nn]|[Cc][Hh][Rr][Oo][Nn]|[Cc][Rr][Oo\u00d3\u00f3]|[Cc][Hh][Rr]|[Cc][Rr]|[Cc][Hh]))",
+    "ezr": "\\b([Ee][Ss][Dd][Rr][Aa][Ss]|[Ee][Zz][Rr][Aa]|[Ee][Ss][Dd]|[Ee][Zz][Rr])",
+    "neh": "\\b([Nn][Ee][Hh][Ee][Mm][Ii\u00CD\u00ed][Aa][Ss]|[Nn][Ee][Hh][Ee][Mm][Ii][Aa][Hh]|[Nn][Ee][Hh]|[Nn][Hh][Mm])",
+    "est": "\\b([Ee][Ss][Tt][Hh][Ee][Rr]|[Ee][Ss][Tt][Ee][Rr]|[Ee][Ss][Tt][Hh]|[Ee][Ss][Tt]|[Ee][Ss])",
+    "job": "\\b([Jj][Oo][Bb])",
+    "psa": "\\b([Ss][Aa][Ll][Mm][Oo][Ss]|[Pp][Ss][Aa][Ll][Mm][Ss]|[Pp][Ss][Aa][Ll][Mm]|[Ss][Aa][Ll][Mm][Oo]|[Pp][Ss][Ll][Mm]|[Pp][Ss][Mm][Ss]|[Ss][Aa][Ll]|[Pp][Ss][Aa]|[Pp][Ss][Mm]|[Pp][Ss][Ss]|[Pp][Ss])",
+    "pro": "\\b([Pp][Rr][Oo][Vv][Ee][Rr][Bb][Ii][Oo][Ss]|[Pp][Rr][Oo][Vv][Ee][Rr][Bb][Ss]|[Pp][Rr][Oo][Vv]|[Pp][Rr][Vv]|[Pp][Rr][Oo]|[Pp][Vv]|[Pp][Rr])",
+    "ecc": "\\b([Ee][Cc][Cc][Ll][Ee][Ss][Ii][Aa][Ss][Tt][Ee][Ss]|[Ee][Cc][Ll][Ee][Ss][Ii][Aa][Ss][Tt][Ee\u00C9\u00e9][Ss]|[Qq][Oo][Hh][Ee][Ll][Ee][Tt][Hh]|[Ee][Cc][Cc][Ll][Ee][Ss]|[Qq][Oo][Hh][Ee][Cc][Ll]|[Ee][Cc][Cc][Ll]|[Ee][Cc])",
+    "sng": "\\b([Cc][Aa][Nn][Tt][Aa][Rr][Ee][Ss]|[Ss][Oo][Nn][Gg]([\\s][Oo][Ff][\\s][Ss][Oo][Ll][Oo][Mm][Oo][Nn])?|[Cc][Aa][Nn][Tt]|[Cc][Nn][Tt]|[Cc][Aa][Nn]|[Ss][Oo][Ss])",
+    "isa": "\\b([Ii][Ss][Aa][Ii\u00cd\u00ed][Aa][Ss]|[Ii][Ss][Aa][Ii][Aa][Hh]|[Ii][Ss][Aa]|[Ii][Ss])",
+    "jer": "\\b([Jj][Ee][Rr][Ee][Mm][Ii\u00cd\u00ed][Aa][Ss]|[Jj][Ee][Rr][Ee][Mm][Ii][Aa][Hh]|[Jj][Ee][Rr]|[Jj][Ee])",
+    "lam": "\\b([Ll][Aa][Mm][Ee][Nn][Tt][Aa][Cc][Ii][Oo][Nn][Ee][Ss]|[Ll][Aa][Mm]|[Ll][Aa]|[Ll][Mm])",
+    "ezk": "\\b([Ee][Zz][Ee][Kk][Ii][Ee][Ll]|[Ee][Zz][Ee][Qq][Uu][Ii][Ee][Ll]|[Ee][Zz][Ee][Kk]|[Ee][Zz][Ee][Qq]|[Ee][Zz][Kk]|[Ee][Zz][Qq]|[Ee][Zz][Ee]|[Ee][Zz])",
     "dan": "\\b([Dd][Aa][Nn][Ii][Ee][Ll]|[Dd][Aa][Nn]|[Dd][Aa])",
-    // "oz": "",
-    // "jol": "",
-    // "amo": "",
-    // "abd": "",
+    "hos": "\\b([Oo][Ss][Ee][Aa][Ss]|[Hh][Oo][Ss][Ee][Aa]|[Hh][Oo][Ss]|[Oo][Ss])",
+    "jol": "\\b([Jj][Oo][Ee][Ll]|[Jj][Oo][Ll]|[Jj][Ll])",
+    "amo": "\\b([Aa][Mm][Oo][Ss]|[Aa][Mm][Oo]|[Aa][Mm])",
+    "oba": "\\b([Aa][Bb][Dd][Ii\u00cd\u00ed][Aa][Ss]|[Oo][Bb][Aa][Dd][Ii][Aa][Hh]|[Aa][Bb][Dd]|[Oo][Bb][Aa][Dd]|[Oo][Bb][Dd]|[Oo][Bb])",
     "jon": "\\b([Jj][Oo][Nn][Aa][Ss]|[Jj][Oo][Nn])",
-    "mic": "\\b([Mm][Ii][Qq][Uu][Ee][Aa][Ss]|[Mm][Ii][Qq]|[Mm][Ii][Cc]|[Mm][Ii])",
-    // "nah": "",
-    "hab": "\\b([Hh][Aa][Bb][Aa][Kk][Kk][Uu][Kk]|[Hh][Aa][Bb][Aa][Cc][Uu][Cc]|[Hh][Aa][Bb]|[H][Bb])",
-    // "sof": "",
-    // "hag": "",
-    "zac": "\\b([Zz][Aa][Cc][Aa][Rr][[Ii]|[\u00ED\u00CD]][Aa][Ss]|[Zz][Ee][Cc][Hh][Aa][Rr][Ii][Aa][Hh]|[Zz][Aa][Cc]|[Zz][Aa]|[Zz][Ee][Cc][Hh]|[Zz][Ee][Cc])",
-    "mal": "\\b([Mm][Aa][Ll][Aa][Qq][Uu][Ii][Aa][Ss]|[Mm][Aa][Ll])",
-    "mat": "\\b([Mm][Aa][Tt][Ee][Oo]|[Mm][Aa][Tt]|[Mm][Tt]|[Mm][Aa][Tt][Tt][Hh][Ee][Ww]|[Mm][Aa][Tt][Tt]|[Mm][Tt][Tt])",
-    "mrk": "\\b([Mm][Aa][Rr][Cc][Oo][Ss]|[Mm][Aa][Rr]|[Mm][Aa][Rr][Kk]|[Mm][Rr][Kk]|[Mm][Cc]|[Mm][Rr]|[Mm][Kk])",
-    "luk": "\\b([Ll][Uu][Cc][Aa][Ss]|[Ll][Uu][Cc]|[Ll][Cc]|[Ll][Uu][Kk][Ee]|[Ll][Uu][Kk]|[Ll][Kk])",
-    "jhn": "\\b([Jj][Uu][Aa][Nn]|[Jj][Oo][Hh][Nn]|[Jj][Hh][Nn]|[Jj][Nn]|[Jj][Uu][Aa])",
-    "act": "\\b(([Hh][Ee][Cc][Hh][Oo][Ss]([\\s][Dd][Ee][\\s][Ll][Oo][Ss][\\s][Aa][Pp][Oo\u00d3\u00f3][Ss][Tt][Oo][Ll][Ee][Ss])?)|[Hh][Cc][Hh][Ss]|[Hh][Cc][Hh]|[Aa][Cc][Tt][Ss]|[Aa][Cc][Tt]|[Aa][Cc])",
-    "rom": "\\b(Romanos|Romans|Roms|Rmns|Rom|Ro|Rmn|Rm)", 
-    "1co": "\\b(" + regexFirstOf + "(Corintios|Cor|Co|Corinthians))",
-    "2co": "\\b((((2(((nd)|[ao])[\\s]))|((2|((II)|(ii)))[\\s]?))|((([Ss][Ee][Cc][Oo][Nn][Dd]([\\s][Oo][Ff])?)|([Ss][Ee][Gg][Uu][Nn][Dd][AaOo]([\\s][Dd][Ee])?))[\\s]))(Corintios|Cor|Co|Corinthians))",
-    "gal": "\\b([Gg][\u00c1\u00e1Aa][Ll][Aa][Tt][Aa][Ss]|[Gg][Aa][Ll]|[Gg][Ll]|[Gg][Aa]|[Gg][A\u0301])",
-    "eph": "\\b([Ee][Ff][Ee][Ss][Ii][Oo][Ss]|[Ee][Pp][Hh][Ee][Ss][Ii][Aa][Nn][Ss]|[Ee][Pp][Hh][Ee]|[Ee][Ff][Ee]|[Ee][Pp][Hh]|[Ee][Ff])",
-    "fil": "\\b(Filipenses|Fil|Fl|Flp)",
-    "col": "\\b(Colosenses|Colossians|Col)",
-    "1th": "\\b(" + regexFirstOf + "(Tesalonicenses|Thessalonians|Tes|Ts|Thess|Th))",
-    "2th": "\\b(" + regexSecondOf + "(Tesalonicenses|Thessalonians|Tes|Thess|Th))",
-    "tit": "\\b(Tito|Titus|Tit|Ti)", //se invirtieron estos pues si identifica despues un 1Ti lo pondra como timoteo y no como tito
-    "1ti": "\\b(" + regexFirstOf + "(Timoteo|Timothy|Tim|Tm))",
-    "2ti": "\\b(" + regexSecondOf + "(Timoteo|Timothy|Tim|Tm))",
-    "phm": "\\b(Filemon|Filemu00f3n|Fi)",
-    "heb": "\\b(Hebreos|Heb|He)", //TODO y el ingles... u.u
-    "san": "\\b(Santiago|San|Sa|St|S)",
-    "1pe": "\\b(" + regexFirstOf + "(Pedro|Peter|Pet|Ped|Pe))",
-    "2pe": "\\b(" + regexSecondOf + "(Pedro|Peter|Pet|Ped|Pe))",
-    "1jn": "\\b(" + regexFirstOf + "(Jua(n)?|Jn))",
-    "2jn": "\\b(" + regexSecondOf + "(Jua(n)?|Jn))",
-    "3jn": "\\b(" + regexThirdOf + "(Jua(n)?|Jn))",
-    "jud": "\\b(Judas|Jude|Jud|Jd)",
-    "Ap": "\\b(Revelaciones|Apocalipsis|Apoc|Rev|Rv|Ap)"
+    "mic": "\\b([Mm][Ii][Qq][Uu][Ee][Aa][Ss]|[Mm][Ii][Cc][Aa][Hh]|[Mm][Ii][Qq]|[Mm][Ii][Cc]|[Mm][Ii])",
+    "nam": "\\b([Nn][Aa][Hh][Uu][Mm]|[Nn][Aa][Hh][Uu][Mm]|[Nn][Aa][Hh]|[Nn][Hh][Mm]|[Nn][Aa])",
+    "hab": "\\b([Hh][Aa][Bb][Aa][Kk][Kk][Uu][Kk]|[Hh][Aa][Bb][Aa][Cc][Uu][Cc]|[Hh][Aa][Bb]|[Hh][Bb])",
+    "zep": "\\b([Ss][Oo][Ff][Oo][Nn][Ii\u00cd\u00ed][Aa][Ss]|[Zz][Ee][Pp][Hh][Aa][Nn][Ii][Aa][Hh]|[Zz][Ee][Pp][Hh]|[Ss][Oo][Ff]|[Zz][Ee][Pp])",
+    "hag": "\\b([Hh][Aa][Gg][Ee][Oo]|[Hh][Aa][Gg]|[Hh][Gg])",
+    "zec": "\\b([Zz][Aa][Cc][Aa][Rr][Ii\u00ED\u00CD][Aa][Ss]|[Zz][Ee][Cc][Hh][Aa][Rr][Ii][Aa][Hh]|[Zz][Ee][Cc][Hh]|[Zz][Aa][Cc]|[Zz][Ee][Cc]|[Zz][Aa])",
+    "mal": "\\b([Mm][Aa][Ll][Aa][Qq][Uu][Ii][Aa][Ss]|[Mm][Aa][Ll][Aa][Cc][Hh][Ii]|[Mm][Aa][Ll])",
+    "mat": "\\b([Mm][Aa][Tt][Ee][Oo]|[Mm][Aa][Tt][Tt][Hh][Ee][Ww]|[Mm][Aa][Tt][Tt]|[Mm][Tt][Tt]|[Mm][Aa][Tt]|[Mm][Tt])",
+    "mrk": "\\b([Mm][Aa][Rr][Cc][Oo][Ss]|[Mm][Aa][Rr][Kk]|[Mm][Rr][Kk]|[Mm][Aa][Rr]|[Mm][Cc]|[Mm][Rr]|[Mm][Kk])",
+    "luk": "\\b([Ll][Uu][Cc][Aa][Ss]|[Ll][Uu][Kk][Ee]|[Ll][Uu][Kk]|[Ll][Uu][Cc]|[Ll][Kk]|[Ll][Cc])",
+    "jhn": "\\b([Jj][Uu][Aa][Nn]|[Jj][Oo][Hh][Nn]|[Jj][Hh][Nn]|[Jj][Uu][Aa]|[Jj][Nn])",
+    "act": "\\b(([Hh][Ee][Cc][Hh][Oo][Ss]([\\s][Dd][Ee][\\s][Ll][Oo][Ss][\\s][Aa][Pp][Oo\u00d3\u00f3][Ss][Tt][Oo][Ll][Ee][Ss])?)|[Aa][Cc][Tt][Ss]|[Hh][Cc][Hh][Ss]|[Aa][Cc][Tt]|[Hh][Cc][Hh]|[Aa][Cc])",
+    "rom": "\\b([Rr][Oo][Mm][Aa][Nn][Oo][Ss]|[Rr][Oo][Mm][Aa][Nn][Ss]|[Rr][Mm][Nn][Ss]|[Rr][Oo][Mm][Ss]|[Rr][Oo][Mm]|[Rr][Mm][Nn]|[Rr][Oo]|[Rr][Mm])",
+    "1co": "\\b(" + regexFirstOf + "([Cc][Oo][Rr][Ii][Nn][Tt][Ii][Oo][Ss]|[Cc][Oo][Rr][Ii][Nn][Tt][Hh][Ii][Aa][Nn][Ss]|[Cc][Oo][Rr]|[Cc][Oo]))",
+    "2co": "\\b(" + regexSecondOf + "([Cc][Oo][Rr][Ii][Nn][Tt][Ii][Oo][Ss]|[Cc][Oo][Rr][Ii][Nn][Tt][Hh][Ii][Aa][Nn][Ss]|[Cc][Oo][Rr]|[Cc][Oo]))",
+    "gal": "\\b([Gg][Aa\u00c1\u00e1][Ll][Aa][Tt][Aa][Ss]|[Gg][Aa][Ll][Aa][Tt][Ii][Aa][Nn][Ss]|[Gg][Aa\u00c1\u00e1][Ll]|[Gg][Aa][Ll]|[Gg][Aa\u00c1\u00e1]|[Gg][Ll]|[Gg][Aa])",
+    "eph": "\\b([Ee][Ff][Ee][Ss][Ii][Oo][Ss]|[Ee][Pp][Hh][Ee][Ss][Ii][Aa][Nn][Ss]|[Ee][Pp][Hh][Ee]|[Ee][Pp][Hh]|[Ee][Ff][Ee]|[Ee][Ff])",
+    "php": "\\b([Ff][Ii][Ll][Ii][Pp][Ee][Nn][Ss][Ee][Ss]|[Pp][Hh][Ii][Ll][Ii][Pp][Pp][Ii][Aa][Nn][Ss]|[Pp][Hh][Ii][Ll]|[Ff][Ii][Ll]|[Pp][Hh][Pp]|[Ff][Ll][Pp]|[Ff][Ll])",
+    "col": "\\b([Cc][Oo][Ll][Oo][Ss][Ee][Nn][Ss][Ee][Ss]|[Cc][Oo][Ll][Oo][Ss][Ss][Ii][Aa][Nn][Ss]|[Cc][Oo][Ll])",
+    "1th": "\\b(" + regexFirstOf + "([Tt][Ee][Ss][Aa][Ll][Oo][Nn][Ii][Cc][Ee][Nn][Ss][Ee][Ss]|[Tt][Hh][Ee][Ss][Ss][Aa][Ll][Oo][Nn][Ii][Aa][Nn][Ss]|[Tt][Hh][Ee][Ss][Ss]|[Tt][Ee][Ss]|[Tt][Hh]|[Tt][Ss]))",
+    "2th": "\\b(" + regexSecondOf + "([Tt][Ee][Ss][Aa][Ll][Oo][Nn][Ii][Cc][Ee][Nn][Ss][Ee][Ss]|[Tt][Hh][Ee][Ss][Ss][Aa][Ll][Oo][Nn][Ii][Aa][Nn][Ss]|[Tt][Hh][Ee][Ss][Ss]|[Tt][Ee][Ss]|[Tt][Hh]|[Tt][Ss]))",
+    "1ti": "\\b(" + regexFirstOf + "([Tt][Ii][Mm][Oo][Tt][Ee][Oo]|[Tt][Ii][Mm][Oo][Tt][Hh][Yy]|[Tt][Ii][Mm]|[Tt][Mm]))",
+    "2ti": "\\b(" + regexSecondOf + "([Tt][Ii][Mm][Oo][Tt][Ee][Oo]|[Tt][Ii][Mm][Oo][Tt][Hh][Yy]|[Tt][Ii][Mm]|[Tt][Mm]))",
+    "tit": "\\b([Tt][Ii][Tt][Oo]|[Tt][Ii][Tt][Uu][Ss]|[Tt][Ii][Tt]|[Tt][Ii])",
+    "phm": "\\b([Ff][Ii][Ll][Ee][Mm][Oo\u00f3\u00d3][Nn]|[Pp][Hh][Ii][Ll][Ee][Mm][Oo][Nn]|[Pp][Hh][Mm]|[Ff][Ii])",
+    "heb": "\\b([Hh][Ee][Bb][Rr][Ee][Oo][Ss]|[Hh][Ee][Bb][Rr][Ee][Ww][Ss]|[Hh][Ee][Bb]|[Hh][Ee])",
+    "jas": "\\b([Ss][Aa][Nn][Tt][Ii][Aa][Gg][Oo]|[Jj][Aa][Mm][Ee][Ss]|[Ss][Aa][Nn]|[Jj][Aa][Ss]|[Jj][Aa][Mm]|[Ss][Tt]|[Ss][Aa]|[Ss])",
+    "1pe": "\\b(" + regexFirstOf + "([Pp][Ee][Dd][Rr][Oo]|[Pp][Ee][Tt][Ee][Rr]|[Pp][Ee][Tt]|[Pp][Ee][Dd]|[Pp][Ee]))",
+    "2pe": "\\b(" + regexSecondOf + "([Pp][Ee][Dd][Rr][Oo]|[Pp][Ee][Tt][Ee][Rr]|[Pp][Ee][Tt]|[Pp][Ee][Dd]|[Pp][Ee]))",
+    "1jn": "\\b(" + regexFirstOf + "([Jj][Uu][Aa]([Nn])?|[Jj][Oo][Hh][Nn]|[Jj][Nn]))",
+    "2jn": "\\b(" + regexSecondOf + "([Jj][Uu][Aa]([Nn])?|[Jj][Oo][Hh][Nn]|[Jj][Nn]))",
+    "3jn": "\\b(" + regexThirdOf + "([Jj][Uu][Aa]([Nn])?|[Jj][Oo][Hh][Nn]|[Jj][Nn]))",
+    "jud": "\\b([Jj][Uu][Dd][Aa][Ss]|[Jj][Uu][Dd][Ee]|[Jj][Uu][Dd]|[Jj][Dd])",
+    "rev": "\\b([Rr][Ee][Vv][Ee][Ll][Aa][Cc][Ii][Oo\u00f3\u00d3][Nn]([Ee][Ss])?|[Aa][Pp][Oo][Cc][Aa][Ll][Ii][Pp][Ss][Ii][Ss]|[Rr][Ee][Vv][Ee][Ll][Aa][Tt][Ii][Oo][Nn]|[Aa][Pp][Oo][Cc]|[Rr][Ee][Vv]|[Rr][Vv]|[Aa][Pp])"
 };
 
 /**
@@ -141,7 +141,7 @@ const books = {
  * @author Obed Vazquez
  * @since 26/01/2016
  */
-const allVersesRegex = "[\\.]?[\\s]?[\\d]*[:|\\.]?[\\d]+(([-|–]{1}[\\d]+)?([,][\\s]?[\\d]+([-|–]{1}[\\d]+)?)*)?"; 
+const allVersesRegex = "[\\.]?[\\s]*[0-9]+(?:[-–][0-9]+)?(?:[:\\.][0-9]+(?:[-–][0-9]+)?)?(?:[,;][\\s]*[0-9]+(?:[-–][0-9]+)?(?:[:\\.][0-9]+(?:[-–][0-9]+)?)?)*";
 //bible.com no acepta referencias entre varios capitulos por ejemplo: Jn 1:3-2:3  Ó Jn 3:2;4:1 (con el ultimo se identificaria como: Jn 3:2,4)
 //El ; se elimino para que solo identifique la , pues es muy claro que es estandar.
 
@@ -170,8 +170,8 @@ VerseMaker.prototype.setBibleHyperlinksEnglish = function setBibleHyperlinksEngl
     try {
         idiomID = 1;
         const versesFoundCounter = this.setBibleHyperlinks();
-        if(versesFoundCounter === 0) {
-            this.alert("VerseMaker couldn't found any Biblical citation, if you need help you can go to the About menu to learn how to make your own Bible verse citation.","Oops!");
+        if (versesFoundCounter === 0) {
+            this.alert("VerseMaker couldn't found any Biblical citation, if you need help you can go to the About menu to learn how to make your own Bible verse citation.", "Oops!");
         } else {
             this.alert(versesFoundCounter + " verses have been set as hyperlinks to the KJV version.", "Success");
         }
@@ -201,10 +201,10 @@ VerseMaker.prototype.setBibleHyperlinksSpanish = function setBibleHyperlinksSpan
     try {
         idiomID = 149;
         const versesFoundCounter = this.setBibleHyperlinks();
-        if(versesFoundCounter === 0) {
-            this.alert("No se ha encontrado ninguna cita Bíblica, si necesitas ayuda ve al menú de About para aprender a hacer tu propia cita bíblica.","Oops!");
+        if (versesFoundCounter === 0) {
+            this.alert("No se ha encontrado ninguna cita Bíblica, si necesitas ayuda ve al menú de About para aprender a hacer tu propia cita bíblica.", "Oops!");
         } else {
-            this.alert(versesFoundCounter + " versículos se han establecido como hipervínculos a la versión RVR60.","Éxito");
+            this.alert(versesFoundCounter + " versículos se han establecido como hipervínculos a la versión RVR60.", "Éxito");
         }
     } catch (e) {
         const errorTitle = "UnknownError";
@@ -235,7 +235,7 @@ VerseMaker.prototype.setBibleHyperlinks = function setBibleHyperlinks() {
             name: "ValidationError",
             message: errorMessage,
             methodName: methodName,
-            toString: function() {
+            toString: function () {
                 return ("Exception " + this.name + " at " + VerseMaker.name + "." + methodName + "() :: " + this.message);
             }
         };
@@ -269,10 +269,10 @@ VerseMaker.prototype.findBooks = function findBooks(textElem) {
     if (textElem === null) return null;
     try {
         let versesFoundCounter = 0;
-        
+
         for (const bibleURLBookName in books) {
             let bookVersesFoundCounter = 0;
-            
+
             const bookRegex = books[bibleURLBookName];
             let range = textElem.findText(bookRegex + allVersesRegex);
             while (range !== null) {
@@ -283,10 +283,10 @@ VerseMaker.prototype.findBooks = function findBooks(textElem) {
                 bookVersesFoundCounter++;
                 range = textElem.findText(bookRegex + allVersesRegex, range); //find the next match and puts it into the range
             }
-            
+
             versesFoundCounter = versesFoundCounter + bookVersesFoundCounter;
         }
-        
+
         return versesFoundCounter;
     } catch (e) {
         const errorTitle = "UnknownError";
@@ -585,7 +585,7 @@ function exceptionMail(trace) {
             name: "Fatal Error",
             message: exceptionMessage,
             methodName: "exceptionMail",
-            toString: function() {
+            toString: function () {
                 return ("Exception " + this.name + " at exceptionMail() :: " + this.message);
             }
         };

@@ -86,3 +86,4 @@ Thumbs.db
 *.csv
 /.vscode/settings.json
 /Screenshots/
+node_modules/
