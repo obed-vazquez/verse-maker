@@ -9,8 +9,8 @@
  */
 
 /**
-* This is a temporal flag to know if it is working on a Development environment or in production.
-* If the plug-in has being deployed please set this flag into false.
+* This is a temporal flag to know if it is working in a Development environment or in production.
+* If the plug-in has been deployed, please set this flag to false.
 * @type    {boolean}
 * @author  Obed Vazquez
 * @since   27/07/2016
@@ -18,10 +18,10 @@
 const devMode = false;
 
 /**
- * This class contains all the process of the project.
+ * This class contains all the processes of the project.
  * It has the view element as the logic elements of the project.
- * Is it like this because the functionality is very basic but its expected as the functionality
- * grows that it will be modularized by the developer that is responsible for this.
+ * Is it like this because the functionality is very basic, but it's expected that as the functionality
+ * grows that it will be modularized by the developer who is responsible for this.
  *
  * @author Obed Vazquez
  * @author Oscar Villareal
@@ -35,7 +35,7 @@ function VerseMaker() {
 }
 
 /**
- * This are reusable regex used in the books array. For the first second and third books or letters in the Bible.
+ * These are reusable regex used in the books array. For the first, second, and third books or letters in the Bible.
  * @type    {string}
  * @author  Obed Vazquez
  * @since   26/01/2016
@@ -56,7 +56,7 @@ const regexThirdOf = "(((3(((rd)|[ao])[\\s]))|((3|(III|(iii)))[\\s]?))|((([Tt][H
 
 /**
  * This is an array with all the regex on the Bible used to identify an abbreviation or full name of a book in the Bible.
- * list of books abreviations: https://docs.google.com/spreadsheets/d/140t98l2sZFA0CXipsg6zmlrhYPqGw3oHxSSh7MLI8MU/edit#gid=1285639834
+ * list of books abbreviations: https://docs.google.com/spreadsheets/d/140t98l2sZFA0CXipsg6zmlrhYPqGw3oHxSSh7MLI8MU/edit#gid=1285639834
  * accented elements https://lefunes.wordpress.com/2007/11/14/caracteres-especiales-en-javascript/
  * @type    {Object}
  * @author  Obed Vazquez
@@ -134,7 +134,7 @@ const books = {
 
 /**
  * This is a regex to identify every chapter with or without a verse in the Bible,
- * used in combination with the book's reference to find every citation on the
+ * used in combination with the book's reference to find every citation in the
  * Bible inside the document.
  *
  * @type {string}
@@ -142,8 +142,9 @@ const books = {
  * @since 26/01/2016
  */
 const allVersesRegex = "[\\.]?[\\s]*[0-9]+(?:[-–][0-9]+)?(?:[:\\.][0-9]+(?:[-–][0-9]+)?)?(?:[,;][\\s]*[0-9]+(?:[-–][0-9]+)?(?:[:\\.][0-9]+(?:[-–][0-9]+)?)?)*";
-//bible.com no acepta referencias entre varios capitulos por ejemplo: Jn 1:3-2:3  Ó Jn 3:2;4:1 (con el ultimo se identificaria como: Jn 3:2,4)
-//El ; se elimino para que solo identifique la , pues es muy claro que es estandar.
+/* bible.com does not accept references spanning multiple chapters, for example: Jn 1:3–2:3 or Jn 3:2;4:1 (the latter would be interpreted as Jn 3:2,4).
+ * The semicolon was removed so that only the comma is used, since it is clearly the standard.
+*/
 
 /**
  * Language identifier for bible.com (spanish:149 and english 1).
@@ -155,7 +156,7 @@ const allVersesRegex = "[\\.]?[\\s]*[0-9]+(?:[-–][0-9]+)?(?:[:\\.][0-9]+(?:[-�
 let idiomID;
 
 /**
- * Turns all the references to the Bible in the document to an hyperlink to the actual
+ * Turns all the references to the Bible in the document into a hyperlink to the actual
  * Bible digital verse in bible.com with the help of the method setBibleHyperlinks()
  * and it specifies that the referenced Bible verses must be in the King James Version (English)
  *
@@ -186,10 +187,10 @@ VerseMaker.prototype.setBibleHyperlinksEnglish = function setBibleHyperlinksEngl
 };
 
 /**
- * Turns all the references to the Bible in the document to an hyperlink to the actual
+ * Turns all the references to the Bible in the document into a hyperlink to the actual
  * Bible digital verse in bible.com with the help of the method setBibleHyperlinks()
  * and it specifies that the referenced Bible verses must be in the Reina Valera de 1960 (Spanish),
- * it accomplish this through the idiomID global parameter
+ * it accomplishes this through the idiomID global parameter
  *
  * @author Obed Vazquez Lopez
  * @since 27/Jul/2016
@@ -217,20 +218,20 @@ VerseMaker.prototype.setBibleHyperlinksSpanish = function setBibleHyperlinksSpan
 };
 
 /**
- * Turns all the references to the Bible in the document to an hyperlink to the actual
+ * Turns all the references to the Bible in the document into a hyperlink to the actual
  * Bible digital verse in bible.com.
- * If not specified the referenced Bible verses should be in the RVR60 [Version Reina Valera Revision de 1960] (Spanish).
+ * If not specified, the referenced Bible verses should be in the RVR60 [Version Reina Valera Revision de 1960] (Spanish).
  * Taking all the text elements only in the document and calling the findBooks() method to find any Bible Reference.
  *
  * @author Obed Vazquez
  * @since 26/01/2016
- * @throws ValidationException In case of the initial parameters has not being set (this should not occur).
+ * @throws ValidationException In case the initial parameters have not been set (this should not occur).
  */
 VerseMaker.prototype.setBibleHyperlinks = function setBibleHyperlinks() {
     const methodName = 'setBibleHyperlinks';
     Logger.log(this.constructor.name + "." + methodName + "() :: ");
     if (idiomID === null || idiomID === undefined) {
-        const errorMessage = "The language has not being set. This is an unexpected Error, please provide feedback on its occurrence.";
+        const errorMessage = "The language has not been set. This is an unexpected Error. Please provide feedback on its occurrence.";
         throw {
             name: "ValidationError",
             message: errorMessage,
@@ -257,9 +258,9 @@ VerseMaker.prototype.setBibleHyperlinks = function setBibleHyperlinks() {
 };
 
 /**
- * The solely intention of this method is to find the actual regex in the physical document,
- * for this, the regex must be preconfigured and the method will call the setLinkUrl() function
- * to turn all of the occurrences as Hyperlinks in the given text element from the document.
+ * The sole intention of this method is to find the actual regex in the physical document,
+ * for this, the regex must be preconfigured, and the method will call the setLinkUrl() function
+ * to turn all of the occurrences into Hyperlinks in the given text element from the document.
  *
  * @param {Text} textElem - Text element on the document, more information: https://developers.google.com/apps-script/reference/document/text
  */
@@ -302,7 +303,7 @@ VerseMaker.prototype.findBooks = function findBooks(textElem) {
  * @author Obed Vazquez
  * @since 26/01/2016
  * @param {string} bibleURLBookName - Bible book name in the 'bible.com' URL.
- * @param {Text} textElem - Text element on the document where will insert the URL as an Hyperlink, more info:https://developers.google.com/apps-script/reference/document/text
+ * @param {Text} textElem - Text element in the document where the URL will be inserted as a Hyperlink, more info:https://developers.google.com/apps-script/reference/document/text
  * @param {RangeElement} range - Exact text in the element (and document) where the hyperlink will be inserted;
  *                                  more info: https://developers.google.com/apps-script/reference/document/range-element.
  * @param {string} bookRegex - Bible book regex.
@@ -334,7 +335,7 @@ VerseMaker.prototype.getURL = function getURL(bibleURLBookName, textElem, range,
  * @author Obed Vazquez
  * @since 08/Apr/2016
  * @param {string} bibleURLBookName - Bible book name in the 'bible.com' URL.
- * @param {Text} textElem - Text element on the document where will insert the URL as an Hyperlink, more info:https://developers.google.com/apps-script/reference/document/text
+ * @param {Text} textElem - Text element in the document where the URL will be inserted as a Hyperlink, more info:https://developers.google.com/apps-script/reference/document/text
  * @param {RangeElement} range - Exact text in the element (and document) where the hyperlink will be inserted;
  *                                  more info: https://developers.google.com/apps-script/reference/document/range-element.
  * @throws ValidationException In case one of the Parameters is not provided.
@@ -363,7 +364,7 @@ VerseMaker.prototype.validateGetURLParameters = function validateGetURLParameter
  *
  * @author Obed Vazquez
  * @since 09/Apr/2016
- * @param {string} verse - Any type of bible verse (full or abbreviated), ie: Jhn 1.1 or John 1.1 or Juan 1.1, Jn 1.1-2, etc.
+ * @param {string} verse - Any type of bible verse (full or abbreviated), ie, Jhn 1.1 or John 1.1 or Juan 1.1, Jn 1.1-2, etc.
  * @param {string} bibleURLBookName - The bible.
  * @param {string} bookRegex - The regex of the Bible book name.
  * @throws ValidationException In case any of the parameters is not provided.
@@ -375,7 +376,7 @@ VerseMaker.prototype.getCurrentVerses = function getCurrentVerses(verse, bibleUR
     Logger.log(this.constructor.name + "." + methodName + "(" + verse + "," + bibleURLBookName + "," + bookRegex + ") :: ");
     this.validateGetURLParameters(bibleURLBookName, "textElem", "range", bookRegex);
     if (verse === null || verse === "") {
-        const errorMessage = "the verse must be provided in order to format it. it can be any verse in the Bible in any format";
+        const errorMessage = "The verse must be provided in order to format it. It can be any verse in the Bible in any format.";
         throw new ValidationException(errorMessage, this.constructor.name, methodName, null);
     }
     try {
